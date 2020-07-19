@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>VC Sort</title>
+        <link rel="icon" href="images/favicon.png">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/animate.css">
+        <link rel="stylesheet" href="css/Sorting.css"> 
+        <script src="js/jquery-3.5.1.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/wow.min.js"></script>
+        <script src="js/sorting.js"></script>
+
+        <script>new WOW().init();</script>
+    </head>
+
+    <body>
+       <div class="header">
+            <ul class="nav justify-content-center wow animate__fadeInDown" data-wow-duration="1s">
+                     <span class="nav-item " >
+                        <a href="Home.html"><img class="nav-link img-responsive" src="images/Logo.png"></a>
+                    </span>
+                    <li class="nav-item active" >
+                      <span class="nav-link" id="selection" onclick="activate(this)" >Selection Sort</a>
+                    </li>
+                    <li class="nav-item" id="insertion" onclick="activate(this)" >
+                      <span class="nav-link">Insertion Sort</a>
+                    </li>
+                    <li class="nav-item bubble" id="bubble" onclick="activate(this)" >
+                        <span class="nav-link">Bubble Sort</a>
+                    </li>
+                    <li class="nav-item quick" id="quick" onclick="activate(this)" >
+                      <span class="nav-link">Quick Sort</a>
+                    </li>
+                    <li class="nav-item" id="merge"  onclick="activate(this)">
+                        <span class="nav-link">Merge Sort</a>
+                    </li>
+                    <li class="nav-item counting" id="counting"  onclick="activate(this)">
+                        <span class="nav-link">Counting Sort</a>
+                    </li>
+                
+            </ul>
+        </div>
+       
+         <section class="program">
+            <div class="container">
+                <div id="input-area" class="text-center">
+                    <label class="lead" >Enter your array (numbers seperated by spaces only)</label>
+                    <br>
+                    <input type="text" id="data" >
+                    <button type="button" id="input-btn" class="btn btn-primary" onclick="getInput()">
+                        <i class="fa fa-toggle-down"></i> Input
+                    <button type="button" id="run-btn" class="btn btn-success" onclick="run()">
+                    <i class="fa fa-play"></i> Run
+                    <button type="button" id="run-btn" class="btn btn-warning" onclick="resetArr()">
+                    <i class="fa fa-refresh"></i> Reset
+                    </button>
+                    <button type="button" id="run-btn" class="btn btn-danger" onclick="deleteArr()">
+                    <i class="fa fa-trash"></i> Delete
+                    </button>
+                    <br>
+                </div>
+                <div>
+                    <div id="draw-area" class="row"></div>
+                </div>
+            </div>
+
+
+
+         </section>
+         </div>
+                
+        <div class="footer text-center img-responsive">
+            <div class="container">
+                <h1>Contact me</h1>
+                <ul class="list-unstyled">
+                    <li><a href="https://www.facebook.com/amrzakiam2000" add target="_blank"><i class="fa fa-facebook-square fa-3x hvr-bounce-in" style="color:#3d6ad6"></i></a></li>
+                    <li><a href="https://www.linkedin.com/in/amr-zaki-2542471a0/" add target="_blank"><i class="fa fa-linkedin-square fa-3x hvr-grow-rotate" style="color:#04699e"></i></a></li>
+                    <li><a href="https://twitter.com/AmrZaki12345678" add target="_blank"><i class="fa fa-twitter-square fa-3x hvr-grow" style="color:rgb(29, 161, 242)"></i></a></li>
+                    <li><a href="https://github.com/amrzaki2000" add target="_blank"><i class="fa fa-github fa-3x hvr-bounce-out" style="color:#fff"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    <script src="js/sorting.js"></script>
+    </body>
+</html>
