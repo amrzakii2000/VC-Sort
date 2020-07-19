@@ -1,5 +1,6 @@
 var Main_array=[],
-input_data=[];
+input_data=[],
+sorted=false;
 
 
 //// Activating sort algorithm
@@ -105,7 +106,7 @@ function removeArr()
 {
     var drw_area = document.getElementById("draw-area");
     drw_area.innerHTML="";
-    
+    sorted=false;
 }
 
 //Sleep
@@ -173,6 +174,49 @@ async function selectionSort(main_arr) {
         await sleep(800);
     }
 }
+
+async function insertionSort(main_arr)
+{
+   var temp_arr = main_arr.slice();
+
+    for (var i=0; i<temp_arr.length; i++)
+    {
+        var j=i;
+        while(temp_arr[j]<temp_arr[j-1])
+        {
+            var offbig = $('.slot'+j).offset().left
+            var offsmall = $('.slot'+(j-1)).offset().left 
+            
+            $(".slot"+j).animate(
+                {
+                    left:parseFloat($(".slot"+j).css("left").replace("px", "")) - (offbig-offsmall)
+                }
+            ,500,await sleep(300));
+            
+            $(".slot"+(j-1)).animate(
+                {
+                    left:parseFloat($(".slot"+(j-1)).css("left").replace("px", "")) + (offbig-offsmall)
+                }
+            ,500, function(){
+                $('.slot'+(j-1)).removeClass('slot'+(j-1)).addClass('slot'+j).addClass('temp');
+                $('.slot'+j).not('.temp').removeClass('slot'+j).addClass('slot'+(j-1));
+                $('.temp').removeClass('temp');
+                j--;
+            });
+            var temp=temp_arr[j];
+            temp_arr[j]=temp_arr[j-1];
+            temp_arr[j-1]=temp;
+            
+            await sleep(1000);
+        }
+        $(".slot"+j).css("background-color","#0f0");
+        
+    }
+}
+
+
+
+
 ///////////////////////////////////////////////////////////////////
 //Get the input
 function getInput()
@@ -195,8 +239,15 @@ function getInput()
 
 function run()
 {
-    selectionSort(Main_array);
-   
+    if(!sorted)
+    {
+        if(document.getElementsByClassName("active")[0].firstElementChild.id==="selection")
+            selectionSort(Main_array);
+        else if(document.getElementsByClassName("active")[0].firstElementChild.id==="insertion")
+            insertionSort(Main_array);
+        
+        sorted=true;
+    }
 }
 
 
