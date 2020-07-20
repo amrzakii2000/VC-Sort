@@ -47,6 +47,15 @@ function input_error_message(input_data)
                 return true;
                 
             }
+            else if(sorted)
+            {
+                
+                error_msg = document.createElement("label");
+                error_msg.setAttribute("id","error-msg");
+                input_div.appendChild(error_msg);
+                error_msg.innerText="Please delete or reset the array first";
+                return true;
+            }
         }
         
         return false;
@@ -66,7 +75,16 @@ function length_error_message()
 
 
 /// Drawing array ///
-function draw_input_array(input_array,redraw)
+function 
+
+
+
+
+
+
+
+
+draw_input_array(input_array,redraw)
 {
     var drw_area = document.getElementById("draw-area");
     
@@ -182,6 +200,7 @@ async function insertionSort(main_arr)
     for (var i=0; i<temp_arr.length; i++)
     {
         var j=i;
+        $(".slot"+j).css("background-color","#ff0");
         while(temp_arr[j]<temp_arr[j-1])
         {
             var offbig = $('.slot'+j).offset().left
@@ -215,6 +234,61 @@ async function insertionSort(main_arr)
 }
 
 
+async function bubbleSort(main_arr)
+{
+    var temp_arr = main_arr.slice();
+    for(var i=0; i<temp_arr.length; i++)
+    {
+        if(i)
+            $(".slot"+(temp_arr.length-i)).css("background-color","#0f0");
+
+        for(var j=0; j<temp_arr.length-i-1; j++)
+        {
+            $(".slot"+j).css("background-color","#ff0");
+            $(".slot"+(j+1)).css("background-color","#ff0");
+            await sleep(500);
+            if(temp_arr[j]>temp_arr[j+1])
+            {
+                var offbig = $('.slot'+(j+1)).offset().left
+                var offsmall = $('.slot'+j).offset().left 
+                
+                $(".slot"+j).animate(
+                {
+                    left:parseFloat($(".slot"+j).css("left").replace("px", "")) + (offbig-offsmall)
+                }
+                ,500,await sleep(300));
+            
+                $(".slot"+(j+1)).animate(
+                {
+                    left:parseFloat($(".slot"+(j+1)).css("left").replace("px", "")) - (offbig-offsmall)
+                }
+                ,500, function(){
+                
+                $('.slot'+(j+1)).removeClass('slot'+(j+1)).addClass('slot'+j).addClass('temp');
+                $('.slot'+j).not('.temp').removeClass('slot'+j).addClass('slot'+(j+1));
+                $('.temp').removeClass('temp');
+                $(".slot"+j).css("background-color","#f2f2f2");
+                $(".slot"+(j+1)).css("background-color","#f2f2f2");
+            });
+                $(".slot"+j).css("background-color","#f2f2f2");
+                $(".slot"+(j+1)).css("background-color","#f2f2f2");
+                var temp=temp_arr[j];
+                temp_arr[j]=temp_arr[j+1];
+                temp_arr[j+1]=temp;
+                
+
+            }
+            $(".slot"+j).css("background-color","#f2f2f2");
+            $(".slot"+(j+1)).css("background-color","#f2f2f2");
+            
+            await sleep(800);
+        }
+    }
+
+    $(".slot0").css("background-color","#0f0");
+}
+
+
 
 
 ///////////////////////////////////////////////////////////////////
@@ -239,13 +313,14 @@ function getInput()
 
 function run()
 {
-    if(!sorted)
+    if(!sorted&&Main_array.length)
     {
         if(document.getElementsByClassName("active")[0].firstElementChild.id==="selection")
             selectionSort(Main_array);
         else if(document.getElementsByClassName("active")[0].firstElementChild.id==="insertion")
             insertionSort(Main_array);
-        
+        else if(document.getElementsByClassName("active")[0].firstElementChild.id==="bubble")
+            bubbleSort(Main_array);
         sorted=true;
     }
 }
