@@ -13,7 +13,7 @@
         <script src="js/jquery-3.5.1.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/wow.min.js"></script>
-        <script src="js/sorting.js"></script>
+        <script src="js/sortingVisualize.js"></script>
 
         <script>new WOW().init();</script>
     </head>
@@ -30,17 +30,23 @@
                     <li class="nav-item"  onclick="activate(this)" >
                       <span class="nav-link" id="insertion">Insertion Sort</a>
                     </li>
-                    <li class="nav-item bubble"  onclick="activate(this)" >
+                    <li class="nav-item"  onclick="activate(this)" >
                         <span class="nav-link" id="bubble">Bubble Sort</a>
                     </li>
-                    <li class="nav-item quick"  onclick="activate(this)" >
+                    <li class="nav-item"  onclick="activate(this)" >
                       <span class="nav-link" id="quick">Quick Sort</a>
                     </li>
                     <li class="nav-item"   onclick="activate(this)">
                         <span class="nav-link" id="merge">Merge Sort</a>
                     </li>
-                    <li class="nav-item counting"   onclick="activate(this)">
+                    <li class="nav-item"   onclick="activate(this)">
                         <span class="nav-link" id="counting">Counting Sort</a>
+                    </li>
+                    <li class="nav-item"   onclick="activate(this)">
+                        <span class="nav-link" id="shell">Shell Sort</a>
+                    </li>
+                    <li class="nav-item"   onclick="activate(this)">
+                        <span class="nav-link" id="heap">Heap Sort</a>
                     </li>
                 
             </ul>
@@ -52,14 +58,14 @@
                     <label class="lead" >Enter your array (numbers seperated by spaces only)</label>
                     <br>
                     <input type="text" id="data" >
-                    <button type="button" id="input-btn" class="btn btn-primary" onclick="getInput()">
+                    <button type="button" class="btn btn-primary" onclick="getInput()">
                         <i class="fa fa-toggle-down"></i> Input
-                    <button type="button" id="run-btn" class="btn btn-success" onclick="run()">
-                    <i class="fa fa-play"></i> Run
-                    <button type="button" id="run-btn" class="btn btn-warning" onclick="resetArr()">
+                    <button type="button" class="btn btn-success" onclick="run()">
+                    <i class="fa fa-spinner"></i> Run
+                    <button type="button" class="btn btn-warning" onclick="resetArr()">
                     <i class="fa fa-refresh"></i> Reset
                     </button>
-                    <button type="button" id="run-btn" class="btn btn-danger" onclick="deleteArr()">
+                    <button type="button" class="btn btn-danger" onclick="deleteArr()">
                     <i class="fa fa-trash"></i> Delete
                     </button>
                     <br>
@@ -85,6 +91,6 @@
                 </ul>
             </div>
         </div>
-    <script src="js/sorting.js"></script>
+    <script src="js/sortingVisualize.js"></script>
     </body>
 </html>
