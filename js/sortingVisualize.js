@@ -66,8 +66,7 @@ function length_error_message() {
 
 }
 
-function delErrorMsg()
-{
+function delErrorMsg() {
     let input_div = document.getElementById("input-area");
 
     if (input_div.lastChild.tagName === "LABEL")
@@ -160,7 +159,7 @@ async function selectionSort(main_arr) {
                 min_ind != i ? $(".slot" + min_ind).css("background-color", "#f2f2f2") : 0;
                 $(".slot" + j).css("background-color", "#0f0");
                 min_ind = j;
-                
+
 
             }
         }
@@ -186,7 +185,7 @@ async function insertionSort(main_arr) {
         let j = i;
         $(".slot" + j).css("background-color", "#ff0");
         await sleep(500);
-        
+
         while (temp_arr[j] < temp_arr[j - 1]) {
             let offbig = $('.slot' + j).offset().left
             let offsmall = $('.slot' + (j - 1)).offset().left
@@ -214,7 +213,7 @@ async function insertionSort(main_arr) {
 
             await sleep(800);
         }
-    
+
         $(".slot" + j).css("background-color", "#0f0");
         await sleep(800);
     }
@@ -247,11 +246,11 @@ async function bubbleSort(main_arr) {
 
     $(".slot0").css("background-color", "#0f0");
 }
-    
+
 //Quick Sort//
 async function quickSort(main_arr, low, high) {
 
-    
+    let last;
     let temp_arr = main_arr.slice();
     if (low < high) {
         let pivot = temp_arr[high];
@@ -259,113 +258,155 @@ async function quickSort(main_arr, low, high) {
 
         $(".slot" + high).css("background-color", "#f00");
         $(".slot" + i).css("background-color", "#00f");
-       
+
         await sleep(800);
         for (let j = low; j < high; j++) {
             $(".slot" + j).css("background-color", "#ff0");
             await sleep(800);
             if (temp_arr[j] <= pivot) {
+                $(".slot" + last).css("background-color", "#f2f2f2");
                 $(".slot" + i).css("background-color", "#f2f2f2");
-                await sleep(800);
                 i++;
                 $(".slot" + i).css("background-color", "#00f");
+                await sleep(800);
                 if (i != j) {
 
                     swapDivs(j, i);
+                    await sleep(800);
+                    last = j;
                     let temp = temp_arr[j];
                     temp_arr[j] = temp_arr[i];
                     temp_arr[i] = temp;
-                    
+
 
                 }
-                
-                
+
+
             }
 
-            i!=j?$(".slot" + j).css("background-color", "#f2f2f2"):0;
+            i != j ? $(".slot" + j).css("background-color", "#f2f2f2") : 0;
         }
         $(".slot" + i).css("background-color", "#f2f2f2");
         $(".slot" + high).css("background-color", "#f2f2f2");
-        await swapDivs(high, i + 1);
-        //await sleep(800);
+        swapDivs(high, i + 1);
+        await sleep(800);
         let temp = temp_arr[high];
         temp_arr[high] = temp_arr[i + 1];
         temp_arr[i + 1] = temp;
+        await sleep(800);
 
-
-        quickSort(temp_arr, low, i);
-        quickSort(temp_arr, i + 2, high);
+        await quickSort(temp_arr, low, i);
+        await quickSort(temp_arr, i + 2, high);
     }
 
 }
 
 
 // Heap Sort //
-async function heapify(main_arr,n,i)
-{
-    let largest=i,
-    lChild=(2*i)+1<n?(2*i)+1:-1,
-    rChild=(2*i)+2<n?(2*i)+2:-1;
+async function heapify(main_arr, n, i) {
+    let largest = i,
+        lChild = (2 * i) + 1 < n ? (2 * i) + 1 : -1,
+        rChild = (2 * i) + 2 < n ? (2 * i) + 2 : -1;
     $(".slot" + largest).css("background-color", "#f00");
     $(".slot" + lChild).css("background-color", "#ff0");
     $(".slot" + rChild).css("background-color", "#ff0");
     await sleep(800);
-    if( lChild < n && main_arr[lChild] > main_arr[largest] )
-        {   
-            $(".slot" + largest).css("background-color", "#f2f2f2");
-            $(".slot" + lChild).css("background-color", "#f00");
-            largest=lChild;
-        }
-        else  $(".slot" + lChild).css("background-color", "#f2f2f2");
+    if (lChild < n && main_arr[lChild] > main_arr[largest]) {
+        $(".slot" + largest).css("background-color", "#f2f2f2");
+        $(".slot" + lChild).css("background-color", "#f00");
+        largest = lChild;
+    }
+    else $(".slot" + lChild).css("background-color", "#f2f2f2");
+    await sleep(800);
+    if (rChild < n && main_arr[rChild] > main_arr[largest]) {
+        $(".slot" + largest).css("background-color", "#f2f2f2");
+        $(".slot" + rChild).css("background-color", "#f00");
+        largest = rChild;
+    }
+    else $(".slot" + rChild).css("background-color", "#f2f2f2");
+
+    if (largest != i) {
+        swapDivs(largest, i);
         await sleep(800);
-        if( rChild<n && main_arr[rChild] > main_arr[largest] )
-        {
-            $(".slot" + largest).css("background-color", "#f2f2f2");
-            $(".slot" + rChild).css("background-color", "#f00");
-            largest=rChild;
-        }
-        else  $(".slot" + rChild).css("background-color", "#f2f2f2");
-    
-    if(largest!=i)
-    {
-        swapDivs(largest,i);
-        await sleep(800);
-        let temp=main_arr[largest];
-        main_arr[largest]=main_arr[i];
-        main_arr[i]=temp;
+        let temp = main_arr[largest];
+        main_arr[largest] = main_arr[i];
+        main_arr[i] = temp;
         $(".slot" + i).css("background-color", "#f2f2f2");
-        await heapify(main_arr,n,largest);
+        await heapify(main_arr, n, largest);
         await sleep(800);
     }
     $(".slot" + largest).css("background-color", "#f2f2f2");
 }
 
 
-async function heapSort(main_arr)
-{
-    let temp_arr=main_arr.slice();
-    for(let i=Math.floor(temp_arr.length/2)-1; i>=0; i--)
-        {
-            await heapify(temp_arr,temp_arr.length,i);
-            await sleep(800);
-        }
+async function heapSort(main_arr) {
+    let temp_arr = main_arr.slice();
+    for (let i = Math.floor(temp_arr.length / 2) - 1; i >= 0; i--) {
+        await heapify(temp_arr, temp_arr.length, i);
+        await sleep(800);
+    }
 
 
-    for (let i=temp_arr.length-1; i>0; i-- )
-    {
+    for (let i = temp_arr.length - 1; i > 0; i--) {
         $(".slot" + i).css("background-color", "#ff0");
         $(".slot0").css("background-color", "#ff0");
-        swapDivs(i,0);
+        swapDivs(i, 0);
         await sleep(800);
         $(".slot0").css("background-color", "#f2f2f2");
-        $(".slot"+i).css("background-color", "#0f0");
-        let temp=temp_arr[i];
-        temp_arr[i]=temp_arr[0];
-        temp_arr[0]=temp;
-        await heapify(temp_arr,i,0);
+        $(".slot" + i).css("background-color", "#0f0");
+        let temp = temp_arr[i];
+        temp_arr[i] = temp_arr[0];
+        temp_arr[0] = temp;
+        await heapify(temp_arr, i, 0);
         await sleep(800);
     }
     $(".slot0").css("background-color", "#0f0");
+}
+
+
+
+
+//Shell Sort//
+async function shellSort(main_arr) {
+    let n = main_arr.length;
+    let temp_arr = main_arr.slice();
+    for (let gap = Math.floor(n / 2); gap > 0; gap = Math.floor(gap / 2)) {
+        for (let i = gap; i < n; i++) {
+
+
+            let index = i;
+            while (true) {
+                if (index - gap >= 0) {
+                    $(".slot" + index).css("background-color", "#ff0");
+                    $(".slot" + (index - gap)).css("background-color", "#ff0");
+                    await sleep(500);
+                }
+                if (temp_arr[index] < temp_arr[index - gap]) {
+                    $(".slot" + index).css("background-color", "#f2f2f2");
+                    $(".slot" + (index - gap)).css("background-color", "#f2f2f2");
+                    swapDivs(index, index - gap);
+                    await sleep(500);
+                    let temp = temp_arr[index];
+                    temp_arr[index] = temp_arr[index - gap];
+                    temp_arr[index - gap] = temp;
+
+                } else {
+                    await sleep(500);
+                    $(".slot" + index).css("background-color", "#f2f2f2");
+                    $(".slot" + (index - gap)).css("background-color", "#f2f2f2");
+                    break;
+                }
+                index -= gap;
+                await sleep(500);
+
+            }
+
+        }
+    }
+    for(let i=0; i<n; i++)
+    {
+        $(".slot" + i).css("background-color", "#0f0");
+    }
 }
 ///////////////////////////////////////////////////////////////////
 //Get the input
@@ -385,8 +426,8 @@ function getInput() {
 
 
 
- function run() {
-    
+function run() {
+
     if (!sorted && Main_array.length) {
         if (document.getElementsByClassName("active")[0].firstElementChild.id === "selection")
             selectionSort(Main_array);
@@ -396,8 +437,10 @@ function getInput() {
             bubbleSort(Main_array);
         else if (document.getElementsByClassName("active")[0].firstElementChild.id === "quick")
             quickSort(Main_array, 0, Main_array.length - 1);
-        else if(document.getElementsByClassName("active")[0].firstElementChild.id === "heap")
+        else if (document.getElementsByClassName("active")[0].firstElementChild.id === "heap")
             heapSort(Main_array);
+        else if (document.getElementsByClassName("active")[0].firstElementChild.id === "shell")
+            shellSort(Main_array);
         sorted = true;
     }
 }
