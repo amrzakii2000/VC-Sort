@@ -40,9 +40,6 @@
                         <span class="nav-link" id="merge">Merge Sort</a>
                     </li>
                     <li class="nav-item"   onclick="activate(this)">
-                        <span class="nav-link" id="counting">Counting Sort</a>
-                    </li>
-                    <li class="nav-item"   onclick="activate(this)">
                         <span class="nav-link" id="shell">Shell Sort</a>
                     </li>
                     <li class="nav-item"   onclick="activate(this)">
@@ -57,15 +54,15 @@
                 <div id="input-area" class="text-center">
                     <label class="lead" >Enter your array (numbers seperated by spaces only)</label>
                     <br>
-                    <input type="text" id="data" >
-                    <button type="button" class="btn btn-primary" onclick="getInput()">
+                    <input type="text" id="data" class="To-disable">
+                    <button type="button" class="btn btn-primary To-disable" onclick="getInput()">
                         <i class="fa fa-toggle-down"></i> Input
-                    <button type="button" class="btn btn-success" onclick="run()">
+                    <button type="button" class="btn btn-success To-disable" onclick="run(this)">
                     <i class="fa fa-spinner"></i> Run
-                    <button type="button" class="btn btn-warning" onclick="resetArr()">
+                    <button type="button" class="btn btn-warning To-disable" onclick="resetArr()">
                     <i class="fa fa-refresh"></i> Reset
                     </button>
-                    <button type="button" class="btn btn-danger" onclick="deleteArr()">
+                    <button type="button" class="btn btn-danger To-disable" onclick="deleteArr()">
                     <i class="fa fa-trash"></i> Delete
                     </button>
                     <br>

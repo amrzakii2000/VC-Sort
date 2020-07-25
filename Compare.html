@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>VC Sort</title>
+        <link rel="icon" href="images/favicon.png">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/animate.css">
+        <link rel="stylesheet" href="css/Compare.css"> 
+        <script src="js/CompareFunctions.js"></script>
+        <script src="js/jquery-3.5.1.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/wow.min.js"></script>
+
+        <script>new WOW().init();</script>
+    </head>
+
+    <body>
+       <div class="header">
+            <ul class="nav justify-content-center wow animate__fadeInDown" data-wow-duration="1s">
+                     <span class="nav-item " >
+                        <a href="Home.html"><img class="nav-link img-responsive" src="images/Logo.png"></a>
+                    </span>
+                    <li class="nav-item">
+                      <a href="Compare.html"><span class="nav-link fa fa-compress lead"  > Compare</a>
+                    </li>                
+            </ul>
+        </div>
+       
+       <section class=" compare-area">
+        <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 compare-section text-center" style="border-right: 3px solid #000;">
+                        <p class="lead"> Choose your first algorithm </p>
+                        <select name="sort-algos" class="slct">
+                            <option value="selection">Selection sort</option>
+                            <option value="insertion">Insertion sort</option>
+                            <option value="bubble">Bubble sort</option>
+                            <option value="heap" >Heap sort</option>
+                            <option value="quick">Quick sort</option>
+                            <option value="merge">Merge sort</option>
+                            <option value="shell">Shell sort</option>
+                        </select>
+                        <p class="lead"> Choose number of inputs ( Generated randomly ) </p>
+                        <div class="row">
+                            <div class="col-lg-3 size" onclick="activateFirst(this)">1000</div>
+                            <div class="col-lg-3 size" onclick="activateFirst(this)">10000</div>
+                            <div class="col-lg-3 size" onclick="activateFirst(this)">100000</div>
+                            <div class="col-lg-3 size" onclick="activateFirst(this)">1000000</div>
+                        </div>
+                        <button class="btn btn-success" style="margin:20px 0 20px 0; font-size:20px;"onclick="generateFirst(this)">
+                            Generate
+                        </button>
+                         <div id="first-timer" class="text-center" style="color:#090">
+                            
+                        </div>
+                        <p class="lead"> Click to run first algorithm only with selected size</p>
+                         <button class="btn btn-success" style="margin:20px 0 20px 0" onclick="runFirst(this)">
+                            <i class="fa fa-play"></i> Run
+                        </button>
+                    </div>
+                    <div class="col-lg-6 compare-section text-center">
+                         <p class="lead"> Choose your second algorithm </p>
+                        <select name="sort-algos" class="slct">
+                            <option value="selection">Selection sort</option>
+                            <option value="insertion">Insertion sort</option>
+                            <option value="bubble">Bubble sort</option>
+                            <option value="heap" >Heap sort</option>
+                            <option value="quick">Quick sort</option>
+                            <option value="merge">Merge sort</option>
+                            <option value="shell">Shell sort</option>
+                        </select>
+                        <p class="lead"> Choose number of inputs ( Generated randomly ) </p>
+                        <div class="row">
+                            <div class="col-lg-3 size" onclick="activateSecond(this)">1000</div>
+                            <div class="col-lg-3 size" onclick="activateSecond(this)">10000</div>
+                            <div class="col-lg-3 size" onclick="activateSecond(this)">100000</div>
+                            <div class="col-lg-3 size" onclick="activateSecond(this)">1000000</div>
+                        </div>
+                        <button class="btn btn-danger" style="margin:20px 0 20px 0; font-size:20px;" onclick="generateSecond(this)">
+                            Generate
+                        </button>
+                        <div id="second-timer" class="text-center" style="color:#c06">
+                            
+                        </div>
+                        <p class="lead"> Click to run second algorithm only with selected size</p>
+                        <button class="btn btn-danger" style="margin:20px 0 20px 0" onclick="runSecond(this)">
+                            <i class="fa fa-play"></i> Run
+                        </button>
+                    </div>
+                </div>
+        </div>    
+          <div class="container text-center">
+                <p class='lead'> Click to run both algorithms ( Must have same number of inputs generated)</p>
+                <button id="compare" class="btn " style="margin:20px 0 20px 0" onclick="compare()" >
+                            <i class="fa fa-compress"></i> Compare
+                </button>
+                </div>
+       </section>
+
+
+                
+        <div class="footer text-center img-responsive">
+            <div class="container">
+                <h1>Contact me</h1>
+                <ul class="list-unstyled">
+                    <li><a href="https://www.facebook.com/amrzakiam2000" add target="_blank"><i class="fa fa-facebook-square fa-3x" style="color:#3d6ad6"></i></a></li>
+                    <li><a href="https://www.linkedin.com/in/amr-zaki-2542471a0/" add target="_blank"><i class="fa fa-linkedin-square fa-3x " style="color:#04699e"></i></a></li>
+                    <li><a href="https://twitter.com/AmrZaki12345678" add target="_blank"><i class="fa fa-twitter-square fa-3x" style="color:rgb(29, 161, 242)"></i></a></li>
+                    <li><a href="https://github.com/amrzaki2000" add target="_blank"><i class="fa fa-github fa-3x" style="color:#fff"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>

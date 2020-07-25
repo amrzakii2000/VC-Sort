@@ -1,6 +1,7 @@
 var Main_array = [],
     input_data = [],
-    sorted = false;
+    sorted = false,
+    running = false;
 
 
 //// Activating sort algorithm
@@ -119,6 +120,23 @@ function sleep(ms) {
 }
 
 
+//Disable buttons
+
+function toggle_disable() {
+    let input_sec = document.getElementsByClassName("To-disable");
+
+    for (let i = 0; i < input_sec.length; i++) {
+        if (!input_sec[i].hasAttribute("disabled")) {
+            input_sec[i].setAttribute("disabled", "true");
+        }
+        else {
+            input_sec[i].removeAttribute("disabled", "false");
+        }
+    }
+
+}
+
+
 //swapDivs
 function swapDivs(big, small) {
     let offbig = $('.slot' + big).offset().left
@@ -186,7 +204,7 @@ async function insertionSort(main_arr) {
         $(".slot" + j).css("background-color", "#ff0");
         await sleep(500);
 
-        while (temp_arr[j] < temp_arr[j - 1]) {
+        while (temp_arr[j] < temp_arr[j - 1] && j > 0) {
             let offbig = $('.slot' + j).offset().left
             let offsmall = $('.slot' + (j - 1)).offset().left
 
@@ -403,9 +421,61 @@ async function shellSort(main_arr) {
 
         }
     }
-    for(let i=0; i<n; i++)
-    {
+    for (let i = 0; i < n; i++) {
         $(".slot" + i).css("background-color", "#0f0");
+    }
+}
+
+////// Merge Sort  /////
+
+async function merge(main_arr, l, m, r) {
+    let i = 0,
+        j = 0,
+        k = l,
+        n1 = m - l + 1,
+        n2 = r - m,
+        L = main_arr.slice(l, m + 1),
+        R = main_arr.slice(m + 1, r + 1);
+
+    while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) {
+            swapDivs(i, k);
+            await sleep(800);
+            main_arr[k] = L[i++];
+        }
+        else {
+            swapDivs(j, k);
+            await sleep(800);
+            main_arr[k] = R[j++];
+        }
+        k++;
+    }
+
+    while (i < n1) {
+        swapDivs(i, k);
+        await sleep(800);
+        main_arr[k++] = L[i++];
+    }
+
+    while (j < n2) {
+        swapDivs(j, k);
+        await sleep(800);
+        main_arr[k++] = R[j++];
+    }
+
+}
+
+
+
+async function mergeSort(main_arr, l, r) {
+    if (l < r) {
+        let m = l + Math.floor((r - l) / 2);
+        await mergeSort(main_arr, l, m);
+        await sleep(800);
+        await mergeSort(main_arr, m + 1, r);
+        await sleep(800);
+        await merge(main_arr, l, m, r);
+        await sleep(800);
     }
 }
 ///////////////////////////////////////////////////////////////////
@@ -426,22 +496,31 @@ function getInput() {
 
 
 
-function run() {
+async function run(ele) {
+
 
     if (!sorted && Main_array.length) {
+        ele.firstElementChild.classList.add("fa-pulse", "fa-fw");
+        toggle_disable();
+        await sleep(100);
         if (document.getElementsByClassName("active")[0].firstElementChild.id === "selection")
-            selectionSort(Main_array);
+            await selectionSort(Main_array);
         else if (document.getElementsByClassName("active")[0].firstElementChild.id === "insertion")
-            insertionSort(Main_array);
+            await insertionSort(Main_array);
         else if (document.getElementsByClassName("active")[0].firstElementChild.id === "bubble")
-            bubbleSort(Main_array);
+            await bubbleSort(Main_array);
         else if (document.getElementsByClassName("active")[0].firstElementChild.id === "quick")
-            quickSort(Main_array, 0, Main_array.length - 1);
+            await quickSort(Main_array, 0, Main_array.length - 1);
         else if (document.getElementsByClassName("active")[0].firstElementChild.id === "heap")
-            heapSort(Main_array);
+            await heapSort(Main_array);
         else if (document.getElementsByClassName("active")[0].firstElementChild.id === "shell")
-            shellSort(Main_array);
+            await shellSort(Main_array);
+        else if (document.getElementsByClassName("active")[0].firstElementChild.id === "merge")
+            await mergeSort(Main_array, 0, Main_array.length - 1);
+
         sorted = true;
+        toggle_disable();
+        ele.firstElementChild.classList.remove("fa-pulse", "fa-fw");
     }
 }
 

@@ -52,6 +52,8 @@
 .btn
 {
     margin:5px;
+    padding: 10px;
+    transition: all 1s;
 }
 #data
 {
@@ -60,7 +62,7 @@
     height:50px;
     width:250px;
     margin-top: 20px;
-    
+    transition: all 1s;
 }
 #error-msg
 {
@@ -108,8 +110,10 @@
     display: inline-block;
     margin-left: 20px;
     margin-top: 20px;
-    
+    transition: all 0.8s;
 }
-
+.footer ul li:hover{
+    transform: rotate(360deg);
+}
 
 /*******************************************************/

@@ -1,0 +1,112 @@
+
+/* Header */
+
+.header
+{
+    background-color:#222;
+    
+}
+  
+.nav li span
+{
+    color:#FF0;
+    font-size: 30px;
+    padding: 25px;
+    font-weight: bold;
+  
+}
+
+
+/*******************************************************/
+
+/* Compare section */
+
+
+
+.compare-section
+{
+    padding: 30px;
+    min-height: 600px;
+}
+
+.slct
+{
+    color:#000;
+    padding:10px;
+    font-size: 20px;
+    margin-bottom:20px;
+}
+
+.size
+{
+    background-color: #222;
+    color:#fff;
+    margin:10px;
+    padding:5px;
+    border-radius: 8%;
+    cursor:pointer;
+    transition: all 0.5s;
+}
+
+.active-first
+{
+    background-color: #090;
+    color:#fff;
+}
+
+.active-second
+{
+    background-color: #c06;
+    color:#fff;
+}
+
+#first-timer,
+#second-timer
+{
+    font-size: 80px;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+#compare
+{
+    background-color: #222;
+    color:#ff0;
+}
+
+.btn
+{
+    font-size: 40px;
+
+}
+/*******************************************************/
+/*footer*/
+
+.footer
+{
+    background-color: #222;
+    
+    padding:20px;
+    border-top: 3px solid white;
+}
+
+.footer h1
+{
+    color: #fa0505;
+
+}
+
+.footer ul li
+{
+    display: inline-block;
+    margin-left: 20px;
+    margin-top: 20px;
+    
+}
+
+ a i:hover{
+    transform: rotate(360deg);
+    transition: all 0.8s;
+}
+
+/*******************************************************/
