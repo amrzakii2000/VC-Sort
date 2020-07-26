@@ -34,6 +34,10 @@
 
 /*Program*/
 
+.legends li{
+    display:inline;
+    margin-left:10px;
+}
 
 .program
 {
@@ -53,6 +57,7 @@
 {
     margin:5px;
     padding: 10px;
+    font-size: 18px;
     transition: all 1s;
 }
 #data

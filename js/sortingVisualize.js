@@ -7,8 +7,15 @@ var Main_array = [],
 //// Activating sort algorithm
 function activate(ele) {
     if (!ele.classList.contains("active")) {
-        document.querySelector(".active").classList.remove('active');
+
+        let deactive = document.querySelector(".active"),
+            deactive_id = deactive.firstElementChild.id;
+        deactive.classList.remove('active');
+        document.getElementById(deactive_id + "-legend").setAttribute("hidden", "true");
+
+        let active_id = ele.firstElementChild.id;
         ele.classList.add("active");
+        document.getElementById(active_id + "-legend").removeAttribute("hidden");
     }
 
 }
@@ -160,6 +167,35 @@ function swapDivs(big, small) {
 
 }
 
+// Move slot
+
+function moveDown(i) {
+    $(".slot" + i).animate(
+        {
+
+            top: parseFloat($(".slot" + i).css("top").replace("px", "")) + 100
+        }
+        , 300);
+}
+
+function moveUp(i) {
+    $(".slot" + i).animate(
+        {
+
+            top: parseFloat($(".slot" + i).css("top").replace("px", "")) - 100
+        }
+        , 300);
+}
+
+
+// Mark Sorted for quick and merge sort
+function markSorted() {
+    for (let i = 0; i < Main_array.length; i++) {
+        $(".slot" + i).css("background-color", "#0f0");
+    }
+}
+
+
 /// Selection Sort ///
 async function selectionSort(main_arr) {
 
@@ -196,6 +232,7 @@ async function selectionSort(main_arr) {
     }
 }
 
+/// Inserton Sort ///
 async function insertionSort(main_arr) {
     let temp_arr = main_arr.slice();
 
@@ -314,6 +351,7 @@ async function quickSort(main_arr, low, high) {
         await sleep(800);
 
         await quickSort(temp_arr, low, i);
+        await sleep(800);
         await quickSort(temp_arr, i + 2, high);
     }
 
@@ -351,7 +389,7 @@ async function heapify(main_arr, n, i) {
         main_arr[i] = temp;
         $(".slot" + i).css("background-color", "#f2f2f2");
         await heapify(main_arr, n, largest);
-        await sleep(800);
+        await sleep(500);
     }
     $(".slot" + largest).css("background-color", "#f2f2f2");
 }
@@ -361,7 +399,7 @@ async function heapSort(main_arr) {
     let temp_arr = main_arr.slice();
     for (let i = Math.floor(temp_arr.length / 2) - 1; i >= 0; i--) {
         await heapify(temp_arr, temp_arr.length, i);
-        await sleep(800);
+        await sleep(500);
     }
 
 
@@ -376,7 +414,7 @@ async function heapSort(main_arr) {
         temp_arr[i] = temp_arr[0];
         temp_arr[0] = temp;
         await heapify(temp_arr, i, 0);
-        await sleep(800);
+        await sleep(500);
     }
     $(".slot0").css("background-color", "#0f0");
 }
@@ -435,47 +473,112 @@ async function merge(main_arr, l, m, r) {
         n1 = m - l + 1,
         n2 = r - m,
         L = main_arr.slice(l, m + 1),
-        R = main_arr.slice(m + 1, r + 1);
+        R = main_arr.slice(m + 1, r + 1),
+        ind = l,
+        ind2 = m + 1,
+        swapped = [];
+
+    for (let i = l; i <= r; i++)
+        swapped.push(i);
+
+    for (let i = l; i < m + 1; i++) {
+        $(".slot" + i).css("background-color", "#f00");
+        moveDown(i);
+    }
+
+    for (let i = m + 1; i <= r; i++) {
+        $(".slot" + i).css("background-color", "#00f");
+        moveDown(i);
+    }
+
+    await sleep(1000);
 
     while (i < n1 && j < n2) {
+
         if (L[i] <= R[j]) {
-            swapDivs(i, k);
-            await sleep(800);
+            if (swapped[ind - l] != k) {
+                swapDivs(swapped[ind - l], k);
+                await sleep(1000);
+
+                let temp = swapped[swapped.indexOf(k)];
+                swapped[swapped.indexOf(k)] = swapped[ind - l];
+                swapped[ind - l] = temp;
+
+            }
+            ind++;
             main_arr[k] = L[i++];
         }
         else {
-            swapDivs(j, k);
-            await sleep(800);
+            if (swapped[ind2 - l] != k) {
+                swapDivs(swapped[ind2 - l], k);
+                await sleep(800);
+
+                let temp = swapped[swapped.indexOf(k)];
+                swapped[swapped.indexOf(k)] = swapped[ind2 - l];
+                swapped[ind2 - l] = temp;
+            }
+            ind2++;
             main_arr[k] = R[j++];
         }
         k++;
     }
 
     while (i < n1) {
-        swapDivs(i, k);
-        await sleep(800);
+
+        if (swapped[ind - l] != k) {
+            swapDivs(swapped[ind - l], k);
+            await sleep(1000);
+
+            let temp = swapped[swapped.indexOf(k)];
+            swapped[swapped.indexOf(k)] = swapped[ind - l];
+            swapped[ind - l] = temp;
+
+        }
+        ind++;
         main_arr[k++] = L[i++];
     }
 
     while (j < n2) {
-        swapDivs(j, k);
-        await sleep(800);
+        if (swapped[ind2 - l] != k) {
+            swapDivs(swapped[ind2 - l], k);
+            await sleep(1000);
+
+            let temp = swapped[swapped.indexOf(k)];
+            swapped[swapped.indexOf(k)] = swapped[ind - l];
+            swapped[ind2 - l] = temp;
+        }
+        ind2++;
         main_arr[k++] = R[j++];
     }
 
+
+    for (let i = l; i < m + 1; i++) {
+        $(".slot" + i).css("background-color", "#f2f2f2");
+    }
+    for (let i = m + 1; i <= r; i++) {
+        $(".slot" + i).css("background-color", "#f2f2f2");
+    }
+
+    for (let i = l; i <= r; i++) {
+        moveUp(i);
+    }
+
+    await sleep(1000);
 }
 
 
 
 async function mergeSort(main_arr, l, r) {
+
     if (l < r) {
+
         let m = l + Math.floor((r - l) / 2);
         await mergeSort(main_arr, l, m);
-        await sleep(800);
+
         await mergeSort(main_arr, m + 1, r);
-        await sleep(800);
+
         await merge(main_arr, l, m, r);
-        await sleep(800);
+
     }
 }
 ///////////////////////////////////////////////////////////////////
@@ -509,14 +612,18 @@ async function run(ele) {
             await insertionSort(Main_array);
         else if (document.getElementsByClassName("active")[0].firstElementChild.id === "bubble")
             await bubbleSort(Main_array);
-        else if (document.getElementsByClassName("active")[0].firstElementChild.id === "quick")
+        else if (document.getElementsByClassName("active")[0].firstElementChild.id === "quick") {
             await quickSort(Main_array, 0, Main_array.length - 1);
+            markSorted();
+        }
         else if (document.getElementsByClassName("active")[0].firstElementChild.id === "heap")
             await heapSort(Main_array);
         else if (document.getElementsByClassName("active")[0].firstElementChild.id === "shell")
             await shellSort(Main_array);
-        else if (document.getElementsByClassName("active")[0].firstElementChild.id === "merge")
+        else if (document.getElementsByClassName("active")[0].firstElementChild.id === "merge") {
             await mergeSort(Main_array, 0, Main_array.length - 1);
+            markSorted();
+        }
 
         sorted = true;
         toggle_disable();
