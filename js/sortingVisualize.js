@@ -197,9 +197,8 @@ function markSorted() {
 
 
 /// Selection Sort ///
-async function selectionSort(main_arr) {
+async function selectionSort(temp_arr) {
 
-    let temp_arr = main_arr.slice();
     for (let i = 0; i < temp_arr.length; i++) {
         let min_ind = i;
         $(".slot" + i).css("background-color", "#f00");
@@ -233,8 +232,7 @@ async function selectionSort(main_arr) {
 }
 
 /// Inserton Sort ///
-async function insertionSort(main_arr) {
-    let temp_arr = main_arr.slice();
+async function insertionSort(temp_arr) {
 
     for (let i = 0; i < temp_arr.length; i++) {
         let j = i;
@@ -275,8 +273,7 @@ async function insertionSort(main_arr) {
 }
 
 //Bubble Sort
-async function bubbleSort(main_arr) {
-    let temp_arr = main_arr.slice();
+async function bubbleSort(temp_arr) {
     for (let i = 0; i < temp_arr.length; i++) {
         if (i)
             $(".slot" + (temp_arr.length - i)).css("background-color", "#0f0");
@@ -303,10 +300,9 @@ async function bubbleSort(main_arr) {
 }
 
 //Quick Sort//
-async function quickSort(main_arr, low, high) {
+async function quickSort(temp_arr, low, high) {
 
     let last;
-    let temp_arr = main_arr.slice();
     if (low < high) {
         let pivot = temp_arr[high];
         let i = low - 1;
@@ -395,8 +391,7 @@ async function heapify(main_arr, n, i) {
 }
 
 
-async function heapSort(main_arr) {
-    let temp_arr = main_arr.slice();
+async function heapSort(temp_arr) {
     for (let i = Math.floor(temp_arr.length / 2) - 1; i >= 0; i--) {
         await heapify(temp_arr, temp_arr.length, i);
         await sleep(500);
@@ -423,9 +418,8 @@ async function heapSort(main_arr) {
 
 
 //Shell Sort//
-async function shellSort(main_arr) {
-    let n = main_arr.length;
-    let temp_arr = main_arr.slice();
+async function shellSort(temp_arr) {
+    let n = temp_arr.length;
     for (let gap = Math.floor(n / 2); gap > 0; gap = Math.floor(gap / 2)) {
         for (let i = gap; i < n; i++) {
 
@@ -603,25 +597,28 @@ async function run(ele) {
 
 
     if (!sorted && Main_array.length) {
+        let temp_arr=Main_array.slice();
+
         ele.firstElementChild.classList.add("fa-pulse", "fa-fw");
+        delErrorMsg();
         toggle_disable();
-        await sleep(100);
+        await sleep(500);
         if (document.getElementsByClassName("active")[0].firstElementChild.id === "selection")
-            await selectionSort(Main_array);
+            await selectionSort(temp_arr);
         else if (document.getElementsByClassName("active")[0].firstElementChild.id === "insertion")
-            await insertionSort(Main_array);
+            await insertionSort(temp_arr);
         else if (document.getElementsByClassName("active")[0].firstElementChild.id === "bubble")
-            await bubbleSort(Main_array);
+            await bubbleSort(temp_arr);
         else if (document.getElementsByClassName("active")[0].firstElementChild.id === "quick") {
-            await quickSort(Main_array, 0, Main_array.length - 1);
+            await quickSort(temp_arr, 0, Main_array.length - 1);
             markSorted();
         }
         else if (document.getElementsByClassName("active")[0].firstElementChild.id === "heap")
-            await heapSort(Main_array);
+            await heapSort(temp_arr);
         else if (document.getElementsByClassName("active")[0].firstElementChild.id === "shell")
-            await shellSort(Main_array);
+            await shellSort(temp_arr);
         else if (document.getElementsByClassName("active")[0].firstElementChild.id === "merge") {
-            await mergeSort(Main_array, 0, Main_array.length - 1);
+            await mergeSort(temp_arr, 0, Main_array.length - 1);
             markSorted();
         }
 

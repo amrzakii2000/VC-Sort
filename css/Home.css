@@ -1,0 +1,154 @@
+body
+{
+    background: url(../images/Home_background.jpg);
+    background-size: cover;
+    
+}   
+/* Header */
+
+.header
+{
+    background-color:#222;
+    
+}
+  
+.nav li a
+{
+    color:#FFF;
+    font-size: 20px;
+    padding: 30px;
+}
+
+.active
+{
+    background-color: #b90404;
+    
+}
+
+.nav li:hover
+{
+    background-color: #fa0505;
+    transition: all 0.5s;
+}
+
+/*******************************************************/
+
+/* Visualize Section */
+
+.Visualize-section
+{
+    background: #222;
+    margin-top: 25px;
+    padding: 20px;
+    
+    
+    
+}
+
+.Visualize-section h1
+{
+    color:#4d4dff;
+    border-left: 10px solid #4d4dff;
+    padding-left: 10px;
+}
+.Visualize-section i
+{
+font-size: 25em; 
+color:#4d4dff
+}
+
+.Visualize-section p
+{
+    color:#f2f2f2 ;
+    font-weight: 400;
+    
+}
+/*******************************************************/
+
+
+/* Learn Section */
+.Learn-section
+{
+    background: #222;
+    margin-top: 25px;
+    padding: 20px;
+    
+}
+
+.Learn-section h1
+{
+    color: #33cc33;
+    border-left: 10px solid #33cc33;
+    padding-left: 10px;
+}
+.Learn-section i
+{
+font-size: 25em; 
+color:#33cc33
+}
+
+.Learn-section p
+{
+    color:#f2f2f2;
+    font-weight: 400;
+}
+/*******************************************************/
+
+/* Compare Section */
+.Compare-section
+{
+    background: #222;
+    margin-top: 25px;
+    padding: 20px;
+    
+}
+
+.Compare-section h1
+{
+    color: #ff0;
+    border-left: 10px solid #ff0;
+    padding-left: 10px;
+}
+.Compare-section i
+{
+font-size: 25em; 
+color:#ff0
+}
+
+.Compare-section p
+{
+    color:#f2f2f2;
+    font-weight: 400;
+}
+/*******************************************************/
+
+/*footer*/
+
+.footer
+{
+    background-color: #222;
+    margin-top: 25px;
+    padding:20px;
+    border-top: 3px solid white;
+}
+
+.footer h1
+{
+    color: #fa0505;
+
+}
+
+.footer ul li
+{
+    display: inline-block;
+    margin-left: 20px;
+    margin-top: 20px;
+    transition: all 0.8s;
+}
+
+.footer ul li:hover{
+    transform: rotate(360deg);
+}
+
+
+/*******************************************************/
